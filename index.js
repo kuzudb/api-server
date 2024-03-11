@@ -1,10 +1,13 @@
 const express = require("express");
+const cors = require("cors");
 const process = require("process");
 const database = require("./explorer/src/server/utils/Database");
 const logger = require("./explorer/src/server/utils/Logger");
 
 const schema = require("./explorer/src/server/Schema");
 const cypher = require("./explorer/src/server/Cypher");
+
+const CROSS_ORIGIN = process.env.CROSS_ORIGIN.toLowerCase() === "true";
 
 let version;
 
@@ -33,6 +36,11 @@ app.get("/version", (_, res) => {
 app.get("/", (_, res) => {
   res.send({ status: "OK" });
 });
+
+if (CROSS_ORIGIN) {
+  app.use(cors());
+  logger.info("CORS enabled for all origins");
+}
 
 const conn = database.getConnection();
 conn
