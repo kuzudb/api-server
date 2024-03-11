@@ -7,7 +7,9 @@ const logger = require("./explorer/src/server/utils/Logger");
 const schema = require("./explorer/src/server/Schema");
 const cypher = require("./explorer/src/server/Cypher");
 
-const CROSS_ORIGIN = process.env.CROSS_ORIGIN.toLowerCase() === "true";
+const CROSS_ORIGIN = process.env.CROSS_ORIGIN
+  ? process.env.CROSS_ORIGIN.toLowerCase() === "true"
+  : false;
 
 let version;
 
@@ -22,6 +24,12 @@ process.on("SIGTERM", () => {
 });
 
 const app = express();
+
+if (CROSS_ORIGIN) {
+  app.use(cors());
+  logger.info("CORS enabled for all origins");
+}
+
 const PORT = 8000;
 
 const api = express.Router();
@@ -30,17 +38,13 @@ api.use("/cypher", cypher);
 
 app.use(express.json({ limit: "128mb" }));
 app.use("/", api);
-app.get("/version", (_, res) => {
-  res.send({ version: version });
-});
 app.get("/", (_, res) => {
-  res.send({ status: "OK" });
+  res.send({
+    status: "ok",
+    version: version,
+    mode: database.getAccessModeString(),
+  });
 });
-
-if (CROSS_ORIGIN) {
-  app.use(cors());
-  logger.info("CORS enabled for all origins");
-}
 
 const conn = database.getConnection();
 conn
