@@ -12,6 +12,9 @@ RUN mkdir -p /data
 RUN chown -R node:node /database
 RUN chown -R node:node /data
 
+
+RUN apt-get update && apt-get install -y git &&
+
 # Switch to node user
 USER node
 
