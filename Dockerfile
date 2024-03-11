@@ -1,6 +1,7 @@
 FROM node:20-bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV CROSS_ORIGIN=true
 
 # Copy app
 COPY . /home/node/app
