@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "NODE_ENV=production node index.js",
-    "init-submodule": "git submodule update --init --recursive",
+    "init-submodule": "git submodule update --init",
     "minify": "mv explorer/src/server . && rm -rf explorer && mkdir -p explorer/src && mv server explorer/src/server",
     "clean": "rm -rf node_modules && rm -rf explorer"
   },
