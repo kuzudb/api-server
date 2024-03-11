@@ -100,9 +100,13 @@ Please refer to the official Podman docs for [mounting external volumes](https:/
 
 The Kùzu API server provides the following endpoints:
 
-- `GET /`: Get the status of the server.
-  Example usage:
-  With `fetch` in JavaScript:
+### `GET /`:
+
+Get the status of the server.
+
+#### Example usage:
+
+** With `fetch` in JavaScript: **
 
 ```javascript
 fetch("http://localhost:8000")
@@ -110,13 +114,13 @@ fetch("http://localhost:8000")
   .then((data) => console.log(data));
 ```
 
-With `curl` in the terminal:
+** With `curl` in the terminal: **
 
 ```bash
 curl http://localhost:8000
 ```
 
-Example response:
+#### Example response:
 
 ```json
 {
@@ -126,10 +130,13 @@ Example response:
 }
 ```
 
-- `GET /schema`: Get the schema of the database.
+### `GET /schema`:
 
-Example usage:
-With `fetch` in JavaScript:
+Get the schema of the database.
+
+#### Example usage:
+
+** With `fetch` in JavaScript: **
 
 ```javascript
 fetch("http://localhost:8000/schema")
@@ -137,13 +144,13 @@ fetch("http://localhost:8000/schema")
   .then((data) => console.log(data));
 ```
 
-With `curl` in the terminal:
+** With `curl` in the terminal: **
 
 ```bash
 curl http://localhost:8000/schema
 ```
 
-Example response:
+#### Example response:
 
 ```json
 {
@@ -207,10 +214,13 @@ Example response:
 }
 ```
 
-- `POST /cypher`: Execute a Cypher query and get the result. The request body should be a JSON object with a `query` field containing the Cypher query and an optional `params` field containing the parameters for the query (if the query is a parameterized query / prepared statement).
+### `POST /cypher`:
 
-Example usage:
-With `fetch` in JavaScript:
+Execute a Cypher query and get the result. The request body should be a JSON object with a `query` field containing the Cypher query and an optional `params` field containing the parameters for the query (if the query is a parameterized query / prepared statement).
+
+#### Example usage:
+
+** With `fetch` in JavaScript: **
 
 ```javascript
 fetch("http://localhost:8000/cypher", {
@@ -229,7 +239,7 @@ fetch("http://localhost:8000/cypher", {
   .then((data) => console.log(data));
 ```
 
-With `curl` in the terminal:
+** With `curl` in the terminal: **
 
 ```bash
 curl -X POST\
@@ -238,7 +248,7 @@ curl -X POST\
      http://localhost:8000/cypher
 ```
 
-Example response:
+#### Example response:
 
 ```json
 {
