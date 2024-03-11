@@ -42,4 +42,4 @@ ENV PORT=8000
 ENV KUZU_PATH=/database
 
 # Run app
-ENTRYPOINT ["npm", "run", "serve"]
+ENTRYPOINT ["node", "index.js"]
