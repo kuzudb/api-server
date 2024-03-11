@@ -1,8 +1,6 @@
 FROM node:20-bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV CROSS_ORIGIN=true
-
 # Copy app
 COPY . /home/node/app
 
@@ -41,6 +39,7 @@ EXPOSE 8000
 ENV NODE_ENV=production
 ENV PORT=8000
 ENV KUZU_PATH=/database
+ENV CROSS_ORIGIN=true
 
 # Run app
 ENTRYPOINT ["node", "index.js"]
