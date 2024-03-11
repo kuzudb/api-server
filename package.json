@@ -1,0 +1,18 @@
+{
+  "name": "kuzu-api-server",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "serve": "NODE_ENV=production node index.js",
+    "init-submodule": "git submodule update --init --recursive",
+    "minify": "mv explorer/src/server . && rm -rf explorer && mkdir -p explorer/src && mv server explorer/src/server",
+    "clean": "rm -rf node_modules && rm -rf explorer"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "kuzu": "^0.3.1",
+    "pino": "^8.16.1",
+    "pino-pretty": "^10.2.3"
+  }
+}
