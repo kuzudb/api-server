@@ -106,7 +106,7 @@ Get the status of the server.
 
 #### Example usage:
 
-** With `fetch` in JavaScript: **
+With `fetch` in JavaScript:
 
 ```javascript
 fetch("http://localhost:8000")
@@ -114,7 +114,7 @@ fetch("http://localhost:8000")
   .then((data) => console.log(data));
 ```
 
-** With `curl` in the terminal: **
+With `curl` in the terminal:
 
 ```bash
 curl http://localhost:8000
@@ -136,7 +136,7 @@ Get the schema of the database.
 
 #### Example usage:
 
-** With `fetch` in JavaScript: **
+With `fetch` in JavaScript:
 
 ```javascript
 fetch("http://localhost:8000/schema")
@@ -144,7 +144,7 @@ fetch("http://localhost:8000/schema")
   .then((data) => console.log(data));
 ```
 
-** With `curl` in the terminal: **
+With `curl` in the terminal:
 
 ```bash
 curl http://localhost:8000/schema
@@ -220,7 +220,7 @@ Execute a Cypher query and get the result. The request body should be a JSON obj
 
 #### Example usage:
 
-** With `fetch` in JavaScript: **
+With `fetch` in JavaScript:
 
 ```javascript
 fetch("http://localhost:8000/cypher", {
@@ -239,7 +239,7 @@ fetch("http://localhost:8000/cypher", {
   .then((data) => console.log(data));
 ```
 
-** With `curl` in the terminal: **
+With `curl` in the terminal:
 
 ```bash
 curl -X POST\
