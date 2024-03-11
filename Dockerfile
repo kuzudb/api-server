@@ -12,7 +12,8 @@ RUN chown -R node:node /database
 RUN chown -R node:node /data
 
 # Install git, init submodules, minify, and remove git
-RUN apt-get update &&\
+RUN cd /home/node/app &&\
+    apt-get update &&\
     apt-get install -y git &&\
     npm run clean &&\
     npm run init-submodule &&\
