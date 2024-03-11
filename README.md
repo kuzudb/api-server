@@ -62,7 +62,7 @@ docker run -p 8000:8000 \
            --rm kuzudb/api-server:latest
 ```
 
-### Cross-Origin Resource Sharing (CORS)
+#### Cross-Origin Resource Sharing (CORS)
 
 By default, the API server is launched with CORS enabled for all origins. If you want to disable CORS, you can do so by setting the `CROSS_ORIGIN` environment variable to `false` as follows.
 
