@@ -15,7 +15,7 @@ docker run -p 8000:8000 \
 ```
 
 By mounting local database files to Docker via `-v path/to/database:/database`,
-the changes done through the API server will persist to the local database files after the UI is shutdown.
+the changes done through the API server will persist to the local database files after the server is shutdown.
 
 The `--rm` flag tells docker that the container should automatically be removed after we close docker.
 
