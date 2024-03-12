@@ -81,7 +81,7 @@ For example:
 
 ```bash
 podman run -p 8000:8000 \
-           -v /absolute/path/to/database:/database:U \
+           -v path/to/database:/database:U \
            --rm kuzudb/api-server:latest
 ```
 
@@ -89,7 +89,7 @@ or,
 
 ```bash
 podman run -p 8000:8000 \
-           -v /absolute/path/to/database:/database \
+           -v path/to/database:/database \
            --userns=keep-id \
            --rm kuzudb/api-server:latest
 ```
@@ -120,6 +120,14 @@ With `curl` in the terminal:
 curl http://localhost:8000
 ```
 
+With `request` in Python:
+
+```python
+import requests
+response = requests.get("http://localhost:8000")
+print(response.json())
+```
+
 #### Example response:
 
 ```json
@@ -148,6 +156,14 @@ With `curl` in the terminal:
 
 ```bash
 curl http://localhost:8000/schema
+```
+
+With `request` in Python:
+
+```python
+import requests
+response = requests.get("http://localhost:8000/schema")
+print(response.json())
 ```
 
 #### Example response:
@@ -246,6 +262,19 @@ curl -X POST\
      -H "Content-Type: application/json" \
      -d '{"query":"MATCH (u:User) WHERE u.age > $a RETURN u","params":{"a":25}}' \
      http://localhost:8000/cypher
+```
+
+With `request` in Python:
+
+```python
+import requests
+response = requests.post("http://localhost:8000/cypher", \
+                         json={
+                          "query": "MATCH (u:User) WHERE u.age > $a RETURN u",
+                          "params": {"a": 25}
+                          }
+                        )
+print(response.json())
 ```
 
 #### Example response:
