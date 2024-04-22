@@ -6,12 +6,11 @@ const logger = require("./explorer/src/server/utils/Logger");
 
 const schema = require("./explorer/src/server/Schema");
 const cypher = require("./explorer/src/server/Cypher");
+const state = require("./explorer/src/server/State");
 
 const CROSS_ORIGIN = process.env.CROSS_ORIGIN
   ? process.env.CROSS_ORIGIN.toLowerCase() === "true"
   : false;
-
-let version;
 
 process.on("SIGINT", () => {
   logger.info("SIGINT received, exiting");
@@ -30,39 +29,32 @@ if (CROSS_ORIGIN) {
   logger.info("CORS enabled for all origins");
 }
 
-const PORT = 8000;
+let PORT = parseInt(process.env.PORT);
+if (isNaN(PORT)) {
+  PORT = 8000;
+}
+const MAX_PAYLOAD_SIZE = process.env.MAX_PAYLOAD_SIZE
+  ? process.env.MAX_PAYLOAD_SIZE
+  : "128mb";
 
 const api = express.Router();
 api.use("/schema", schema);
 api.use("/cypher", cypher);
-
-app.use(express.json({ limit: "128mb" }));
+api.use("/", state);
+app.use(express.json({ limit: MAX_PAYLOAD_SIZE }));
 app.use("/", api);
-app.get("/", (_, res) => {
-  res.send({
-    status: "ok",
-    version: version,
-    mode: database.getAccessModeString(),
-  });
-});
 
-const conn = database.getConnection();
-conn
-  .query("CALL db_version() RETURN *;")
+database
+  .getDbVersion()
   .then((res) => {
-    return res.getAll();
-  })
-  .then((res) => {
-    const row = res[0];
-    version = Object.values(row)[0];
+    const version = res.version;
+    const storageVersion = res.storageVersion;
     logger.info("Version of Kùzu: " + version);
+    logger.info("Storage version of Kùzu: " + storageVersion);
     app.listen(PORT, () => {
       logger.info("Deployed server started on port: " + PORT);
     });
   })
   .catch((err) => {
     logger.error("Error getting version of Kùzu: " + err);
-  })
-  .finally(() => {
-    database.releaseConnection(conn);
   });
