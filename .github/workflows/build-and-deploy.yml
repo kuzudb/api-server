@@ -27,13 +27,19 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: kuzudb/api-server:latest, kuzudb/api-server:${{ env.VERSION }}
+          tags: kuzudb/api-server:latest, kuzudb/api-server:${{ env.VERSION }},ghcr.io/${{ github.repository_owner }}/api-server:latest,ghcr.io/${{ github.repository_owner }}/api-server:${{ env.VERSION }}
           build-args: |
             SKIP_GRAMMAR=true
             SKIP_BUILD_APP=true
