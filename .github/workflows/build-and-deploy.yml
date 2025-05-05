@@ -39,7 +39,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: kuzudb/api-server:latest, kuzudb/api-server:${{ env.VERSION }},ghcr.io/${{ github.repository_owner }}/api-server:latest,ghcr.io/${{ github.repository_owner }}/api-server:${{ env.VERSION }}
+          tags: kuzudb/api-server:latest, kuzudb/api-server:${{ env.VERSION }}, ghcr.io/${{ github.repository_owner }}/api-server:latest, ghcr.io/${{ github.repository_owner }}/api-server:${{ env.VERSION }}
           build-args: |
             SKIP_GRAMMAR=true
             SKIP_BUILD_APP=true
